@@ -8,7 +8,8 @@
     NSInteger length = string.length;
     NSInteger rows = floorf(sqrtf(length));
     NSInteger cols = ceilf(sqrtf(length));
-    NSMutableArray *array = [[NSMutableArray alloc] init];
+    [string retain];
+    NSMutableArray *array = [[[NSMutableArray alloc] init] autorelease];
    
     while (rows*cols < length && rows <= cols) {
         rows+=1;
@@ -22,6 +23,7 @@
             [array addObject:resultString];
         }
     }
-    return [array componentsJoinedByString:@" "];
+    [string release];
+    return [array componentsJoinedByString:@" "] ;
 }
 @end

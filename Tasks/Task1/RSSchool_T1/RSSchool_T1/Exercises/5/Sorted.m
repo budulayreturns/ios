@@ -1,6 +1,15 @@
 #import "Sorted.h"
 
 @implementation ResultObject
+
+- (void)dealloc {
+    
+    if(_detail) {
+        [_detail release];
+    }
+    [super dealloc];
+}
+
 @end
 
 @implementation Sorted
@@ -14,6 +23,7 @@
 }
 
 - (BOOL) compareElementsIn: (NSArray *) array withElementAt: (NSUInteger) index1 andElementAt: (NSUInteger) index2 {
+    [array retain];
     BOOL sorted = YES;
     if (index1 != 0){
         if([array[index2] integerValue] < [array[index1 - 1] integerValue]){
@@ -25,11 +35,15 @@
             sorted = NO;
         }
     }
+    [array release];
     return sorted;
 }
 
 
 - (NSDictionary*) checkSortingIn:(NSArray *)mainArray withArray:(NSMutableArray *)indexArray {
+    
+    [mainArray retain];
+    [indexArray retain];
     
     NSUInteger indexes = indexArray.count;
     NSInteger index1 =0;
@@ -53,15 +67,19 @@
     else {
         result = YES;
     }
-    NSString * val = [[NSString alloc] initWithFormat:@"%ld %ld", index1+1, index2+1];
-    NSString *key = [[NSString alloc] initWithFormat:@"%s", result ? "YES":"NO"];
+    NSString * val = [[[NSString alloc] initWithFormat:@"%ld %ld", index1+1, index2+1] autorelease];
+    NSString *key = [[[NSString alloc] initWithFormat:@"%s", result ? "YES":"NO"] autorelease];
     NSDictionary *dict = @{key:val};
+    
+    [mainArray release];
     return dict;
 }
 
 // Complete the sorted function below.
 - (ResultObject*)sorted:(NSString*)string {
-    ResultObject *value = [ResultObject new];
+    
+    [string retain];
+    ResultObject *value = [[ResultObject new] autorelease];
     
     NSUInteger sequence = 0;
     NSUInteger countSingularAnomaly = 0;
@@ -76,7 +94,8 @@
     BOOL isUnsortable = NO;
     
     for (int i = 0; i < array.count-1; i++) {
-        
+       
+            
         if (![self checkSortable:countSingularAnomaly checkPair:countPairAnomaly checkSequence:countSequenceAnomaly]) { //проверить
             isUnsortable = YES;
             break;
@@ -87,32 +106,40 @@
             if (sequence == 1){
                 countSingularAnomaly++;
                 
-                NSArray *array = @[[NSNumber numberWithInt:i], [NSNumber numberWithInt:i+1]];
-                [singularAnomaly addObject:array];
+                NSArray *arr = @[[NSNumber numberWithInt:i], [NSNumber numberWithInt:i+1]];
+                [singularAnomaly addObject:arr];
+                
+                
             }
             else if (sequence == 2){
                 countSingularAnomaly--;
                 countPairAnomaly++;
-                NSArray *array = @[singularAnomaly.lastObject[0], [NSNumber numberWithInt:i+1]];
+                NSArray *arr = @[singularAnomaly.lastObject[0], [NSNumber numberWithInt:i+1]];
                 [singularAnomaly removeLastObject];
-                [pairAnomaly addObject:array];
+                [pairAnomaly addObject:arr];
+                
+                
             }
             else if (sequence == 3){
                 countPairAnomaly--;
                 countSequenceAnomaly++;
-                NSArray *array = @[pairAnomaly.lastObject[0], [NSNumber numberWithInt:i+1]];
+                NSArray *arr = @[pairAnomaly.lastObject[0], [NSNumber numberWithInt:i+1]];
                 [pairAnomaly removeLastObject];
-                [sequenceAnomaly addObject:array];
+                [sequenceAnomaly addObject:arr];
+               
+                
             }
             else if (sequence > 3) {
-                NSArray *array = @[sequenceAnomaly.lastObject[0], [NSNumber numberWithInt:i+1]];
+                NSArray *arr = @[sequenceAnomaly.lastObject[0], [NSNumber numberWithInt:i+1]];
                 [pairAnomaly removeLastObject];
-                [sequenceAnomaly addObject:array];
+                [sequenceAnomaly addObject:arr];
+                
             }
         }
         else {
             sequence = 0;
         }
+        
     }
     
     
@@ -123,7 +150,6 @@
         NSDictionary *singularAnomalyDict = [self checkSortingIn:array withArray:singularAnomaly];
         NSDictionary *pairAnomalyDict = [self checkSortingIn:array withArray:pairAnomaly];
         NSDictionary* sequenceAnomalyDict = [self checkSortingIn:array withArray:sequenceAnomaly];
-        
         
         
         if ([singularAnomalyDict.allKeys.firstObject boolValue] == NO || [pairAnomalyDict.allKeys.firstObject boolValue] == NO || [sequenceAnomalyDict.allKeys.firstObject boolValue] == NO) {
@@ -137,160 +163,30 @@
             
             if (countSingularAnomaly>0&&countPairAnomaly==0&&countSequenceAnomaly==0){
                 value.status = YES;
-                value.detail = [[NSString alloc] initWithFormat:@"swap %@", singularAnomalyDict.allValues.firstObject];
+                value.detail = [[[NSString alloc] initWithFormat:@"swap %@", singularAnomalyDict.allValues.firstObject] autorelease];
             }
             else if (countSingularAnomaly==0&&countPairAnomaly>0&&countSequenceAnomaly==0){
                 value.status = YES;
-                value.detail = [[NSString alloc] initWithFormat:@"swap %@", pairAnomalyDict.allValues.firstObject];
+                value.detail = [[[NSString alloc] initWithFormat:@"swap %@", pairAnomalyDict.allValues.firstObject] autorelease];
             }
             else if (countSingularAnomaly==0&&countPairAnomaly==0&&countSequenceAnomaly>0){
                 value.status = YES;
-                value.detail = [[NSString alloc] initWithFormat:@"reverse %@", sequenceAnomalyDict.allValues.firstObject];
+                value.detail = [[[NSString alloc] initWithFormat:@"reverse %@", sequenceAnomalyDict.allValues.firstObject] autorelease];
             }
             else {
                 value.status = NO;
             }
         }
-        
+       
+    
     }
-    
-    
-    
-    
-//    BOOL isSwapFailed = YES;
-//    BOOL isReverseFailed = YES;
-//    NSInteger counter = 0;
-//    NSInteger sequence = 0;
-//    NSInteger sequenceStarted = 0;
-//    NSInteger swapsComplete = 0;
-//
-//    for (int i = 0; i < array.count-1; i++) {
-//
-//        if (sequenceStarted > 1) {
-//            break;
-//        }
-//        if (swapsComplete > 1) {
-//            break;
-//        }
-//
-//        if ([array[i] integerValue] > [array [i+1] integerValue]) {
-//            sequence++;
-//
-//            if (sequence == 1){
-//                startPos = i;
-//                endPos = i+1;
-//            }
-//            else {
-//                endPos = i+1;
-//                if (sequence == 3) {
-//                    sequenceStarted++;
-//                    isReverseFailed = NO;
-//                }
-//            }
-//        }
-//        else if ([array[i] integerValue] < [array [i+1] integerValue]) {
-//            sequence = 0;
-//
-//        }
-//    }
-//
-//    if (sequenceStarted == 1) {
-//        if (startPos != 0) {
-//            if([array[startPos-1] integerValue]> [array[endPos]integerValue]){
-//                isReverseFailed = YES;
-//            }
-//        }
-//        if (endPos != array.count-1){
-//            if([array[startPos] integerValue] > [array[endPos+1] integerValue]){
-//                isReverseFailed = YES;
-//            }
-//        }
-//    }
-//    else if (sequenceStarted > 1){
-//        isReverseFailed= YES;
-//    }
-//
-//
-//    if (isSwapFailed == NO) {
-//        value.status = YES;
-//        value.detail = [[NSString alloc] initWithFormat:@"swap %ld %ld", (long)startPos+1, (long)endPos+1];
-//    }
-//    else if (isReverseFailed == NO){
-//        value.status = YES;
-//        value.detail = [[NSString alloc] initWithFormat:@"reverse %ld %ld", (long)startPos+1, (long)endPos+1];
-//    }
-////    else if (sequenceStarted==0&&swapsComplete==0){
-////        value.status = YES;
-////    }
-//    else {
-//        value.status = NO;
-//    }
-//
-    
-    
-//    for (int i = 0; i < array.count-1; i++) {
-//
-//        if ([array[i] integerValue] > [array [i+1] integerValue]) {
-//
-//            counter++;
-//            if (counter == 1) {
-//                startPos = i;
-//                endPos = i+1;
-//                isSwap = YES;
-//            }
-//            else if (counter == 2) {
-//                if (isSwap == NO) {
-//
-//                    endPos = i+1;
-//                    if ([array[startPos] integerValue] > [array [i] integerValue]) {
-//                        isSwap = YES;
-//                    }
-//                }
-//                if (isSwap == YES) {
-//                    isSwap = NO;
-//                }
-//            }
-//            else if (counter > 2){
-//
-//
-//
-//            }
-//        }
-//        if ([array[i] integerValue] <= [array [i+1] integerValue]) {
-//
-//            if (isSwap == YES) {
-//                if ([array[startPos] integerValue] >[array [i+1] integerValue]) {
-//                    isSwap = NO;
-//                }
-//            }
-//
-//        }
-//    }
-//    if (counter == 0) {
-//        value.status = YES;
-//    }
-//    else if (counter == 1&&isSwap==YES) {
-//        value.status = YES;
-//        value.detail = [[NSString alloc] initWithFormat:@"swap %ld %ld", (long)startPos+1, (long)endPos+1];
-//    }
-//    else if (counter == 2&&isSwap==YES) {
-//        value.status = YES;
-//        value.detail = [[NSString alloc] initWithFormat:@"swap %ld %ld", (long)startPos+1, (long)endPos+1];
-//    }
-//    else  {
-//         value.status = NO;
-//
-//    }
-    
-//    else {
-    //        value.status = YES;
-    //        value.detail = [[NSString alloc] initWithFormat:@"swap %ld %ld", (long)startPosition, (long)endPosition];
-//    }
-  
+    [singularAnomaly release];
+    [pairAnomaly release];
+    [sequenceAnomaly release];
+    [string release];
+   
     return value;
 }
-
-
 
 
 @end
