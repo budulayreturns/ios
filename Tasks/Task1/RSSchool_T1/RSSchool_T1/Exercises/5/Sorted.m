@@ -95,7 +95,8 @@
     
     for (int i = 0; i < array.count-1; i++) {
        
-            
+        @autoreleasepool {
+        
         if (![self checkSortable:countSingularAnomaly checkPair:countPairAnomaly checkSequence:countSequenceAnomaly]) { //проверить
             isUnsortable = YES;
             break;
@@ -139,7 +140,7 @@
         else {
             sequence = 0;
         }
-        
+        }
     }
     
     
