@@ -19,7 +19,8 @@
 }
 
 - (void)test1 {
-  XCTAssertEqual(@"Sunday, August 14, 2208", [self.machine doomsdayString]);
+    NSLog(@"%@", [self.machine doomsdayString]);
+  XCTAssertTrue([@"Sunday, August 14, 2208" isEqualToString:[self.machine doomsdayString]]);
 }
 
 - (void)test2 {

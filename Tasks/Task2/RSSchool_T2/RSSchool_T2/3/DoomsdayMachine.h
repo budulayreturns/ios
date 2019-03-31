@@ -23,13 +23,16 @@
 @protocol AssimilationInfo <NSObject>
 @property (nonatomic, readonly) NSInteger years;
 @property (nonatomic, readonly) NSInteger months;
-@property (nonatomic, readonly) NSInteger weeks;
 @property (nonatomic, readonly) NSInteger days;
 @property (nonatomic, readonly) NSInteger hours;
 @property (nonatomic, readonly) NSInteger minutes;
 @property (nonatomic, readonly) NSInteger seconds;
 @end
+
 @interface DoomsdayMachine : NSObject
+
+@property (nonatomic, readonly, retain) NSDate *doomsDate;
+
 /**
  Returns AssimilationInfo for a gived date string
 
@@ -37,6 +40,7 @@
  @return AssimilationInfo for the specified date
  */
 - (id<AssimilationInfo>)assimilationInfoForCurrentDateString:(NSString *)dateString;
+
 /**
  Returns a human-readable string of the assimilation date
 
