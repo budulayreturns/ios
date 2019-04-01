@@ -11,8 +11,9 @@
  */
 @interface TinyURL : NSObject
 
-@property (nonatomic, retain, readonly) NSMapTable<NSString*, NSString*> *urlMap;
-@property (nonatomic, retain, readonly,) NSURL *baseURL;
+//@property (nonatomic, retain, readonly) NSMapTable<NSString*, NSString*> *urlMap;
+//@property (nonatomic, retain, readonly) NSMutableOrderedSet *urlMap;
+//@property (nonatomic, retain, readonly,) NSURL *baseURL;
 /**
  Takes a URL and encodes it into a tiny format
 

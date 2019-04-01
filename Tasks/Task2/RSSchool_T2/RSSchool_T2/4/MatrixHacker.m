@@ -38,7 +38,7 @@
 @end
 
 @interface MatrixHacker()
-@property (nonatomic, copy, readwrite) id<Character> (^injectBlock)(NSString *name);
+@property (nonatomic, copy, readwrite) InjectBlock injection;
 @end
 
 @implementation MatrixHacker
@@ -54,15 +54,15 @@ id<Character> (^block)(NSString*) = ^id<Character>(NSString *name) {
  */
 
 - (void)injectCode:(id<Character> (^)(NSString *name))theBlock {
-    [_injectBlock release];
-    _injectBlock = [theBlock copy];
+    [_injection release];
+    _injection = theBlock;
 }
 
 - (NSArray<id<Character>> *)runCodeWithData:(NSArray<NSString *> *)names {
     [names retain];
     __block NSMutableArray <id<Character>> *array = [[NSMutableArray alloc] init];
     [names enumerateObjectsUsingBlock:^(id name, NSUInteger idx, BOOL *stop){
-        [array addObject:self.injectBlock(name)];
+        [array addObject:self.injection(name)];
     }];
     [names release];
     return [array autorelease];
@@ -70,8 +70,8 @@ id<Character> (^block)(NSString*) = ^id<Character>(NSString *name) {
 
 - (void)dealloc
 {
-    if (_injectBlock) {
-        [_injectBlock release];
+    if (_injection) {
+        [_injection release];
     }
     [super dealloc];
 }
