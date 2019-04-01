@@ -26,8 +26,8 @@
 @interface RomanTranslator : NSObject
 @property (nonatomic, readonly, retain) NSDictionary<NSNumber*, NSString*> *romanDict;
 @property (nonatomic, readonly, retain) NSDictionary<NSString*, NSNumber*> *arabicDict;
-- (NSString*) getRomanDigitiWithArabic: (NSInteger) number andRank: (NSInteger) rank;
-- (NSInteger) getArabicDigitiWithRoman: (NSString*) number;
+//- (NSString*) getRomanDigitiWithArabic: (NSInteger) number andRank: (NSInteger) rank;
+//- (NSInteger) getArabicDigitiWithRoman: (NSString*) number;
 /**
  Arabic to roman numbers converter
 

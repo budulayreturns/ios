@@ -5,6 +5,7 @@
 @property (nonatomic, copy) NSString *name;
 @end
 
+
 @implementation Character
 
 + (instancetype)createWithName:(NSString *)name isClone:(BOOL)clone {
@@ -36,6 +37,10 @@
 }
 @end
 
+@interface MatrixHacker()
+@property (nonatomic, copy, readwrite) id<Character> (^injectBlock)(NSString *name);
+@end
+
 @implementation MatrixHacker
 
 /* Injection block
@@ -47,7 +52,6 @@ id<Character> (^block)(NSString*) = ^id<Character>(NSString *name) {
     return [ch autorelease];
 };
  */
-
 
 - (void)injectCode:(id<Character> (^)(NSString *name))theBlock {
     [_injectBlock release];

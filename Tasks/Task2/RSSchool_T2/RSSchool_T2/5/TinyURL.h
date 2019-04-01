@@ -10,6 +10,9 @@
  and the tiny URL can be decoded to the original URL.
  */
 @interface TinyURL : NSObject
+
+@property (nonatomic, retain, readonly) NSMapTable<NSString*, NSString*> *urlMap;
+@property (nonatomic, retain, readonly,) NSURL *baseURL;
 /**
  Takes a URL and encodes it into a tiny format
 

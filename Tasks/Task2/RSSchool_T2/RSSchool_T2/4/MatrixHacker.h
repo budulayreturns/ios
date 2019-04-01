@@ -25,9 +25,10 @@
 
 @end
 
+
 @interface MatrixHacker : NSObject
 
-@property (nonatomic, copy) id<Character> (^injectBlock)(NSString *name);
+@property (nonatomic, copy, readonly) id<Character> (^injectBlock)(NSString *name);
 /**
  Injects the given block into the Matrix by saving it in the class.
 
@@ -42,3 +43,5 @@
  */
 - (NSArray<id<Character>> *)runCodeWithData:(NSArray<NSString *> *)names;
 @end
+
+
