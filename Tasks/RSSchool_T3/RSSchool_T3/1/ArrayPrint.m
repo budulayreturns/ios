@@ -2,17 +2,20 @@
 
 @implementation NSString (RSSchool_Extension_Name)
 - (NSString *) toString {
-    return [NSString stringWithFormat:@"\"%@\"", self];
+    NSString *string = [[[NSString alloc] initWithFormat:@"\"%@\"", self]autorelease];
+    return string;
 }
 @end
 @implementation NSNumber (RSSchool_Extension_Name)
 - (NSString *) toString {
-    return self.stringValue;
+    NSString *string = [[[NSString alloc] initWithFormat:@"%@", self.stringValue] autorelease];
+    return string;
 }
 @end
 @implementation NSNull (RSSchool_Extension_Name)
 - (NSString *) toString {
-    return @"null";
+    NSString *string = [[[NSString alloc] initWithFormat:@"null"] autorelease];
+    return string;
 }
 @end
 @implementation NSArray (RSSchool_Extension_Name)
@@ -39,5 +42,4 @@
     [desc appendFormat:@"]"];
     return desc;
 }
-
 @end

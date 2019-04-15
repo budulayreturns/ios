@@ -18,19 +18,23 @@
 @implementation StepTextField
 - (BOOL) validateText {
     BOOL isValid = NO;
-    NSCharacterSet *allowedCharacterSet = [NSCharacterSet decimalDigitCharacterSet];
-    NSCharacterSet *receivedCharacterSet = [NSCharacterSet characterSetWithCharactersInString:self.text];
+    NSCharacterSet *allowedCharacterSet = [[NSCharacterSet decimalDigitCharacterSet] retain];
+    NSCharacterSet *receivedCharacterSet = [[NSCharacterSet characterSetWithCharactersInString:self.text] retain];
     isValid = [allowedCharacterSet isSupersetOfSet:receivedCharacterSet];
+    [allowedCharacterSet release];
+    [receivedCharacterSet release];
     return isValid;
 }
 
 - (BOOL) validateText: (NSString *) subString {
     BOOL isValid = NO;
     [subString retain];
-    NSCharacterSet *allowedCharacterSet = [NSCharacterSet decimalDigitCharacterSet];
-    NSCharacterSet *receivedCharacterSet = [NSCharacterSet characterSetWithCharactersInString:subString];
+    NSCharacterSet *allowedCharacterSet = [[NSCharacterSet decimalDigitCharacterSet] retain];
+    NSCharacterSet *receivedCharacterSet = [[NSCharacterSet characterSetWithCharactersInString:subString] retain];
     isValid = [allowedCharacterSet isSupersetOfSet:receivedCharacterSet];
     [subString release];
+    [allowedCharacterSet release];
+    [receivedCharacterSet release];
     return isValid;
 }
 
@@ -143,7 +147,7 @@
     [formatter setLocale:[NSLocale currentLocale]];
     [formatter setTimeZone:[NSTimeZone localTimeZone]];
     [formatter setDateFormat:@"dd/MM/yyyy HH:mm"];
-    NSDate *date = [[formatter dateFromString:dateString] autorelease];
+    NSDate *date = [[[formatter dateFromString:dateString]retain]autorelease];
     [formatter release];
     [dateString release];
     return  date;
@@ -174,7 +178,7 @@
         default:
             break;
     }
-    NSDate *newDate = [[NSCalendar currentCalendar] dateByAddingComponents:components toDate:date options:0];
+    NSDate *newDate = [[[[NSCalendar currentCalendar] dateByAddingComponents:components toDate:date options:0] retain] autorelease];
     [date release];
     [components release];
     return newDate;
@@ -210,12 +214,18 @@
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    [keyPath retain];
+    [change retain];
+    [(id)context retain];
     if ([keyPath isEqualToString:@"date"]){
         self.resultLabel.text = [change[@"new"] getStringDate];
     }
      else {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
+    [(id)context release];
+    [keyPath release];
+    [change release];
 }
 
 - (void)startDateTextFieldDidChanged:(id)sender {
@@ -354,7 +364,7 @@
 
 - (Period) convertFromString: (NSString *) string {
     [string retain];
-    NSDictionary *dict = @{@"year":@0, @"month":@1, @"week":@2, @"day":@3, @"hour":@4, @"minute":@5};
+    NSDictionary *dict = [[NSDictionary alloc] initWithDictionary:@{@"year":@0, @"month":@1, @"week":@2, @"day":@3, @"hour":@4, @"minute":@5}];
     NSString *lowerCaseString = [[string lowercaseString] copy];
     Period period = 0;
     if ([dict objectForKey:lowerCaseString]){
@@ -362,6 +372,7 @@
     }
     [string release];
     [lowerCaseString release];
+    [dict release];
     return period;
 }
 
