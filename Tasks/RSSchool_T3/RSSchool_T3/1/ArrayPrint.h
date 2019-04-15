@@ -15,6 +15,21 @@
 
  For all the others, it should print `unsupported`
  */
-@interface NSArray (RSSchool_Extension_Name)
-- (NSString *)print;
+
+@protocol PrintableProtocol <NSObject>
+- (NSString *)toString;
 @end
+@interface NSArray (RSSchool_Extension_Name) <PrintableProtocol>
+- (NSString *)print;
+- (NSString *)toString;
+@end
+@interface NSNull (RSSchool_Extension_Name) <PrintableProtocol>
+- (NSString *)toString;
+@end
+@interface NSString (RSSchool_Extension_Name) <PrintableProtocol>
+- (NSString *)toString;
+@end
+@interface NSNumber (RSSchool_Extension_Name) <PrintableProtocol>
+- (NSString *)toString;
+@end
+

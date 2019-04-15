@@ -34,5 +34,43 @@
  09/04/2019 04:00
  09/04/2019 00:00
 */
-@interface DateMachine : UIViewController
+typedef enum Period:NSInteger {year = 0, month, week, day, hour, minute} Period;
+
+@protocol ValidationProtocol <NSObject>
+- (BOOL) validateText;
+@optional
+- (BOOL) validateText: (NSString *) subString andIndex: (NSInteger) index;
+@optional
+- (BOOL) validateText: (NSString *) subString;
 @end
+
+@interface StartDateTextField : UITextField
+@end
+
+@interface StepTextField : UITextField
+@end
+
+@interface DateUnitTextField : UITextField
+@end
+
+@interface UITextField (RSSchool_Extension_Name) <ValidationProtocol>
+@end
+
+@interface UIButton (RSSchool_Extension_Name) 
+@end
+
+@interface NSDate(RSSchool_Extension_Name)
+- (NSString*)getStringDate;
++ (NSDate*) dateFromString: (NSString*) dateString;
++ (NSDate*) performOperationWithDate: (NSDate*) date andValue: (NSInteger) value andTypeOfPeriod: (Period) period;
+@end
+
+@interface DateMachine : UIViewController <UITextFieldDelegate>
+@property (nonatomic, retain) UILabel *resultLabel;
+@property (nonatomic, retain) UITextField *startDateTextField;
+@property (nonatomic, retain) UITextField *stepTextField;
+@property (nonatomic, retain) UITextField *dateUnitTextField;
+@end
+
+
+
