@@ -7,15 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <objc/runtime.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UITextField (RSSchool_T4_Extension)
-- (void) addBorder;
-- (void) setImageForLeftView: (nullable UIImage*) image;
-//- (void) appendPlusToText;
-//- (void) removePlusFromText;
-- (NSInteger) countNumbersInText;
+- (void) rs_addBorder;
+- (void) rs_setImageForLeftView: (nullable UIImage*) image;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -11,6 +11,7 @@
 #import "NSString+RSSchool_T4_Extension.h"
 #import "CountryTemplates.h"
 #import "CountryCodes.h"
+#import "PhoneTextField.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
