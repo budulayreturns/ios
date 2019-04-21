@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		33AC39AC226A4B3A00E68454 /* NSString+RSSchool_T4_Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 33AC39AB226A4B3A00E68454 /* NSString+RSSchool_T4_Extension.m */; };
+		33AC39AF226A650300E68454 /* CountryCodes.m in Sources */ = {isa = PBXBuildFile; fileRef = 33AC39AE226A650300E68454 /* CountryCodes.m */; };
+		33AC39B2226B2C3F00E68454 /* CountryTemplates.m in Sources */ = {isa = PBXBuildFile; fileRef = 33AC39B1226B2C3F00E68454 /* CountryTemplates.m */; };
+		33AC39B5226B3DC600E68454 /* CountryDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 33AC39B4226B3DC600E68454 /* CountryDescription.m */; };
+		33AF18042268FEE60031449B /* PhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33AF18032268FEE60031449B /* PhoneViewController.m */; };
+		33AF180B22690C6E0031449B /* UITextField+RSSchool_T4_Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 33AF180A22690C6E0031449B /* UITextField+RSSchool_T4_Extension.m */; };
 		BD47B5532268ED9F0060BDF3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BD47B5522268ED9F0060BDF3 /* AppDelegate.m */; };
 		BD47B5552268EDA10060BDF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD47B5542268EDA10060BDF3 /* Assets.xcassets */; };
 		BD47B5582268EDA10060BDF3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD47B5562268EDA10060BDF3 /* LaunchScreen.storyboard */; };
@@ -15,6 +21,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		33AC39AA226A4B3A00E68454 /* NSString+RSSchool_T4_Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+RSSchool_T4_Extension.h"; sourceTree = "<group>"; };
+		33AC39AB226A4B3A00E68454 /* NSString+RSSchool_T4_Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+RSSchool_T4_Extension.m"; sourceTree = "<group>"; };
+		33AC39AD226A650300E68454 /* CountryCodes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CountryCodes.h; sourceTree = "<group>"; };
+		33AC39AE226A650300E68454 /* CountryCodes.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CountryCodes.m; sourceTree = "<group>"; };
+		33AC39B0226B2C3F00E68454 /* CountryTemplates.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CountryTemplates.h; sourceTree = "<group>"; };
+		33AC39B1226B2C3F00E68454 /* CountryTemplates.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CountryTemplates.m; sourceTree = "<group>"; };
+		33AC39B3226B3DC600E68454 /* CountryDescription.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CountryDescription.h; sourceTree = "<group>"; };
+		33AC39B4226B3DC600E68454 /* CountryDescription.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CountryDescription.m; sourceTree = "<group>"; };
+		33AF18022268FEE60031449B /* PhoneViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhoneViewController.h; sourceTree = "<group>"; };
+		33AF18032268FEE60031449B /* PhoneViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhoneViewController.m; sourceTree = "<group>"; };
+		33AF180922690C6E0031449B /* UITextField+RSSchool_T4_Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITextField+RSSchool_T4_Extension.h"; sourceTree = "<group>"; };
+		33AF180A22690C6E0031449B /* UITextField+RSSchool_T4_Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITextField+RSSchool_T4_Extension.m"; sourceTree = "<group>"; };
 		BD47B54E2268ED9F0060BDF3 /* RSSchool_T4.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RSSchool_T4.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD47B5512268ED9F0060BDF3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		BD47B5522268ED9F0060BDF3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -56,6 +74,18 @@
 			isa = PBXGroup;
 			children = (
 				BD47B5612268F8120060BDF3 /* PhoneNumber.pdf */,
+				33AF18022268FEE60031449B /* PhoneViewController.h */,
+				33AF18032268FEE60031449B /* PhoneViewController.m */,
+				33AC39B0226B2C3F00E68454 /* CountryTemplates.h */,
+				33AC39B1226B2C3F00E68454 /* CountryTemplates.m */,
+				33AC39AD226A650300E68454 /* CountryCodes.h */,
+				33AC39AE226A650300E68454 /* CountryCodes.m */,
+				33AC39B3226B3DC600E68454 /* CountryDescription.h */,
+				33AC39B4226B3DC600E68454 /* CountryDescription.m */,
+				33AC39AA226A4B3A00E68454 /* NSString+RSSchool_T4_Extension.h */,
+				33AC39AB226A4B3A00E68454 /* NSString+RSSchool_T4_Extension.m */,
+				33AF180922690C6E0031449B /* UITextField+RSSchool_T4_Extension.h */,
+				33AF180A22690C6E0031449B /* UITextField+RSSchool_T4_Extension.m */,
 				BD47B5512268ED9F0060BDF3 /* AppDelegate.h */,
 				BD47B5522268ED9F0060BDF3 /* AppDelegate.m */,
 				BD47B5542268EDA10060BDF3 /* Assets.xcassets */,
@@ -136,8 +166,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33AF180B22690C6E0031449B /* UITextField+RSSchool_T4_Extension.m in Sources */,
+				33AF18042268FEE60031449B /* PhoneViewController.m in Sources */,
+				33AC39B2226B2C3F00E68454 /* CountryTemplates.m in Sources */,
 				BD47B55B2268EDA10060BDF3 /* main.m in Sources */,
 				BD47B5532268ED9F0060BDF3 /* AppDelegate.m in Sources */,
+				33AC39AC226A4B3A00E68454 /* NSString+RSSchool_T4_Extension.m in Sources */,
+				33AC39AF226A650300E68454 /* CountryCodes.m in Sources */,
+				33AC39B5226B3DC600E68454 /* CountryDescription.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
