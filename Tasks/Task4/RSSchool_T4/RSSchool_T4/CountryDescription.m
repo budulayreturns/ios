@@ -24,9 +24,10 @@
 
 - (void)dealloc
 {
-    //    _length = nil;
-    //    _code = nil;
+    //_length = nil;
+    //_code = nil;
     [_country release];
+    _country = nil;
     [super dealloc];
 }
 @end

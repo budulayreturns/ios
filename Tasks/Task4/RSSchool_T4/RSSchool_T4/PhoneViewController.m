@@ -15,12 +15,20 @@
 
 @implementation PhoneViewController
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _templates = [[CountryTemplates alloc] init];
+        _countries = [[CountryCodes alloc] init];
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self createPhoneTextField];
     [self createTapGestureToHideKeyBoard];
-    self.templates = [[CountryTemplates alloc] init];
-    self.countries = [[CountryCodes alloc] init];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -28,6 +36,7 @@
     if (textFiled) {
         [textFiled addTarget:self action:@selector(phoneTextFieldEditingChanged:) forControlEvents:UIControlEventEditingChanged];
     }
+    [textFiled release];
 }
 
 - (void) viewDidDisappear:(BOOL)animated{
@@ -35,6 +44,7 @@
     if (textFiled) {
         [textFiled removeTarget:self action:@selector(phoneTextFieldEditingChanged:) forControlEvents:UIControlEventEditingChanged];
     }
+    [textFiled release];
 }
 
 - (void) createTapGestureToHideKeyBoard {
@@ -66,6 +76,12 @@
 
 - (void) phoneTextFieldEditingChanged: (UITextField*) textField {
     [textField retain];
+    
+//    UITextRange *textRange = [textField.selectedTextRange copy];
+//    NSInteger offset = [textField offsetFromPosition:textField.beginningOfDocument toPosition:textRange.start];
+//    NSLog(@"Offset new: %ld", (long)offset);
+//    NSLog(@"Text: %@", textField.text);
+    
     NSString *number = [[textField.text rs_getNumbersFromString] copy];
     CountryDescription *country = [[[self.countries searchCountryByString:number] retain] autorelease];
     if (country!=nil) {
@@ -89,9 +105,20 @@
         }
         [textField rs_setImageForLeftView:nil];
     }
+    
     if (![textField.text hasPrefix:@"+"]&&[textField.text rs_containsNumericCharacters]) {
         textField.text = [textField.text rs_appendPlusPrefix];
+       //newPosition = [textField positionFromPosition:textRange.start offset:1];
     }
+    //offset = [textField offsetFromPosition:textField.beginningOfDocument toPosition:textRange.start];
+    
+//    else {
+//        //newPosition= [textField positionFromPosition:textRange.start offset:0];
+//    }
+//    newPosition= [textField positionFromPosition:textRange.start offset:0];
+//    textField.selectedTextRange = [textField textRangeFromPosition:newPosition toPosition:newPosition];
+//UITextPosition *newPosition = [textField.beginningOfDocument copy];
+    
     
     NSLog(@"Editing: %lu", (unsigned long)number.length);
     [country release];

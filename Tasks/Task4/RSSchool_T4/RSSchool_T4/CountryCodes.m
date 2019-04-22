@@ -60,6 +60,7 @@
 
 - (void)dealloc {
     [_countries release];
+    _countries = nil;
     [super dealloc];
 }
 

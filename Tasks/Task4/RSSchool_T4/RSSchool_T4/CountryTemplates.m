@@ -32,6 +32,7 @@
 - (void)dealloc
 {
     [_templates release];
+    _templates = nil;
     [super dealloc];
 }
 @end
